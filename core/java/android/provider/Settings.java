@@ -4513,6 +4513,14 @@ public final class Settings {
         private static final Validator OMNI_BATTERY_LIGHT_LOW_COLOR_VALIDATOR =
                 ANY_STRING_VALIDATOR;
 
+        /*
+         * Whether to auto hide clock
+         * @hide
+         */
+        public static final String STATUS_BAR_CLOCK_AUTO_HIDE = "status_bar_clock_auto_hide";
+        public static final String STATUS_BAR_CLOCK_AUTO_HIDE_HDURATION = "status_bar_clock_auto_hide_hduration";
+        public static final String STATUS_BAR_CLOCK_AUTO_HIDE_SDURATION = "status_bar_clock_auto_hide_sduration";
+
         /**
          * Medium battery charging color
          * @hide
