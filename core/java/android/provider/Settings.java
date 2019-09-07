@@ -6010,6 +6010,11 @@ public final class Settings {
          * @hide
          */
         public static final String LOCKSCREEN_DATE_FORMAT = "lockscreen_date_format";
+        
+        /**
+         * @hide
+         */
+        public static final String SWITCH_STYLE = "switch_style";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
