@@ -463,6 +463,9 @@
     <protected-broadcast android:name="android.intent.action.MANAGED_PROFILE_ADDED" />
     <protected-broadcast android:name="android.intent.action.MANAGED_PROFILE_UNLOCKED" />
     <protected-broadcast android:name="android.intent.action.MANAGED_PROFILE_REMOVED" />
+    
+    <!-- Used to get active package name. -->
+    <protected-broadcast android:name="android.intent.action.ACTIVE_PACKAGE_CHANGED" />
 
     <protected-broadcast android:name="android.bluetooth.adapter.action.BLE_STATE_CHANGED" />
     <protected-broadcast android:name="com.android.bluetooth.map.USER_CONFIRM_TIMEOUT" />

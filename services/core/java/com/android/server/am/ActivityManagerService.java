@@ -27575,6 +27575,10 @@ public class ActivityManagerService extends IActivityManager.Stub
             }
         }
     }
+    
+    Context getContext() {
+        return mContext;
+    }
 
     // omni additions start
     public static final boolean DEBUG_ASPECT_RATIO = DEBUG_ALL || false;
