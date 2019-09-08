@@ -118,9 +118,9 @@
     <dimen name="keyguard_charging_indication_width">32dp</dimen>
 
     <!-- Height of tbhe big battery circle icon in the status bar. -->
-    <dimen name="status_bar_battery_bigcircle_icon_height">20.5dp</dimen>
+    <dimen name="status_bar_battery_bigcircle_icon_height">18.5dp</dimen>
      <!-- Width of the big battery circle icon in the status bar. -->
-    <dimen name="status_bar_battery_bigcircle_icon_width">20.5dp</dimen>
+    <dimen name="status_bar_battery_bigcircle_icon_width">18.5dp</dimen>
 
     <dimen name="quick_qs_drag_handle_height">20dp</dimen>
     <dimen name="qs_header_image_offset">0dp</dimen>
