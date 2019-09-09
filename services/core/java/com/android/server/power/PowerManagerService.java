@@ -287,6 +287,7 @@ public final class PowerManagerService extends SystemService
     private Set<String> mSeenWakeLocks = new HashSet<String>();
     private Set<String> mBlockedWakeLocks = new HashSet<String>();
     private int mWakeLockBlockingEnabled;
+    private String blockedWakelockList="";
 
     // A bitfield that summarizes the state of all active wakelocks.
     private int mWakeLockSummary;
@@ -571,6 +572,17 @@ public final class PowerManagerService extends SystemService
 
     // doze on charge
     private boolean mDozeOnChargeEnabled;
+    
+    
+    public void setBlockedWakeLocks(String wakeLockTagsString) {
+        mBlockedWakeLocks = new HashSet<String>();
+         if (wakeLockTagsString != null && wakeLockTagsString.length() != 0) {
+            String[] parts = wakeLockTagsString.split("\\|");
+            for (int i = 0; i < parts.length; i++) {
+                mBlockedWakeLocks.add(parts[i]);
+            }
+        }
+    }
 
     private final class ForegroundProfileObserver extends SynchronousUserSwitchObserver {
         @Override
@@ -1051,7 +1063,8 @@ public final class PowerManagerService extends SystemService
                 
         String blockedWakelockList = Settings.System.getStringForUser(resolver,
                 Settings.System.WAKELOCK_BLOCKING_LIST, UserHandle.USER_CURRENT);
-        		setBlockedWakeLocks(blockedWakelockList);
+                
+        setBlockedWakeLocks(blockedWakelockList);
         
         mSmartChargingLevel = Settings.System.getInt(resolver,
                 Settings.System.SMART_CHARGING_LEVEL,
@@ -4592,6 +4605,24 @@ public final class PowerManagerService extends SystemService
             }
         }
 
+
+
+        @Override
+       	public String getSeenWakeLocks() {
+            StringBuffer buffer = new StringBuffer();
+            Iterator<String> nextWakeLock = mSeenWakeLocks.iterator();
+            while (nextWakeLock.hasNext()) {
+                String wakeLockTag = nextWakeLock.next();
+                buffer.append(wakeLockTag + "|");
+            }
+            if (buffer.length() > 0) {
+                buffer.deleteCharAt(buffer.length() - 1);
+            }
+            return buffer.toString();
+    }
+
+
+    
         @Override // Binder call
         public void goToSleep(long eventTime, int reason, int flags) {
             if (eventTime > SystemClock.uptimeMillis()) {
@@ -4933,31 +4964,6 @@ public final class PowerManagerService extends SystemService
         }
     }
 
-
-        @Override
-       	public String getSeenWakeLocks() {
-            StringBuffer buffer = new StringBuffer();
-            Iterator<String> nextWakeLock = mSeenWakeLocks.iterator();
-            while (nextWakeLock.hasNext()) {
-                String wakeLockTag = nextWakeLock.next();
-                buffer.append(wakeLockTag + "|");
-            }
-            if (buffer.length() > 0) {
-                buffer.deleteCharAt(buffer.length() - 1);
-            }
-            return buffer.toString();
-        }
-    }
-
-    	private void setBlockedWakeLocks(String wakeLockTagsString) {
-        mBlockedWakeLocks = new HashSet<String>();
-         if (wakeLockTagsString != null && wakeLockTagsString.length() != 0) {
-            String[] parts = wakeLockTagsString.split("\\|");
-            for (int i = 0; i < parts.length; i++) {
-                mBlockedWakeLocks.add(parts[i]);
-            }
-        }
-    }
 
     @VisibleForTesting
     // lastRebootReasonProperty argument to permit testing
